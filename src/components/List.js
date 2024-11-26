@@ -25,13 +25,20 @@ export default function List({todoData, setTodoData}) {
 		<div>
 			{todoData.map(data => (
 				<div key={data.id}>
-					<input 
-					type="checkbox" 
-					onChange={() => handleCompleteChange(data.id)} // 어떤 id가 클릭이 됐는지 알려줌
-					defaultChecked={false}
-					/>
-						{data.title}
-					<button onClick={() => handleClick(data.id)}>X</button>
+					<div className='flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded'>
+						<div className='items-center'>
+							<input 
+							className='mr-2.5'
+							type="checkbox" 
+							onChange={() => handleCompleteChange(data.id)} // 어떤 id가 클릭이 됐는지 알려줌
+							defaultChecked={data.completed}
+							/>
+							<span className={data.completed ? 'line-through' : undefined}>{data.title}</span>
+						</div>
+						<div className='items-center'>
+							<button className='px-4 py-2 float-right' onClick={() => handleClick(data.id)}>X</button>
+						</div>
+					</div>
 				</div>
 			))}
 		</div>
