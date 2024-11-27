@@ -63,10 +63,8 @@ export default function App() {
 					<div className="flex justify-between mb-3 ">
 						<h1>TODO LIST</h1>
 					</div>
-					{/* <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}> */}
 						
 						<List todoData={todoData} setTodoData={setTodoData}/>	
-					{/* </DndContext> */}
 					<Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
 				
 				</div>

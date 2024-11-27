@@ -7,7 +7,7 @@ import { arrayMove } from '@dnd-kit/sortable'; // 배열 요소 순서 변경 �
 // 개별 드래그 가능한 아이템 컴포넌트
 function SortableItem({ id, data, handleCompleteChange, handleClick }) {
   // useSortable 훅을 사용하여 드래그 가능한 속성들을 가져옴
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
   // 드래그 시 애니메이션 및 위치 변환을 적용하기 위한 스타일
   const style = {
@@ -21,13 +21,15 @@ function SortableItem({ id, data, handleCompleteChange, handleClick }) {
       style={style} // 드래그 시 적용할 스타일
       {...attributes} // 기본 드래그 속성
       {...listeners} // 드래그 이벤트 리스너
-      className="flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded"
+      className={`${isDragging ? "bg-gray-300" : "bg-gray-100"} flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 border rounded`}
     >
+			
       <div className="items-center">
         {/* 체크박스로 완료 상태를 토글 */}
         <input
           className="mr-2.5"
           type="checkbox"
+					onPointerDown={(e) => e.stopPropagation()}
           onChange={() => handleCompleteChange(data.id)}
           defaultChecked={data.completed}
         />
@@ -36,7 +38,10 @@ function SortableItem({ id, data, handleCompleteChange, handleClick }) {
       </div>
       <div className="items-center">
         {/* 삭제 버튼 */}
-        <button className="px-4 py-2 float-right" onClick={() => handleClick(data.id)}>
+        <button 
+				className="px-4 py-2 float-right" 
+				onPointerDown={(e) => e.stopPropagation()}
+				onClick={() => {handleClick(data.id);}}>
           X
         </button>
       </div>
