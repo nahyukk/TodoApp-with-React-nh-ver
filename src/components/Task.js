@@ -12,6 +12,7 @@ const Task = React.memo(({
       data.id === id ? { ...data, completed: !data.completed } : data
     );
     setTodoData(newTodoData);
+		localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
 
 	
@@ -28,6 +29,7 @@ const Task = React.memo(({
 			return data
 		})
 		setTodoData(newTodoData)
+		localStorage.setItem('todoData', JSON.stringify(newTodoData));
 		setIsEditing(false)
 	}
 

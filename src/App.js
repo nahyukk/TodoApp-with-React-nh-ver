@@ -6,6 +6,8 @@ import { closestCorners, DndContext } from '@dnd-kit/core';
 import { arrayMove } from "@dnd-kit/sortable";
 
 
+const initialTodoData = localStorage.getItem("todoData") ? JSON.parse(localStorage.getItem("todoData")) : [];
+
 export default function App() {
 	const getTodoDataPos = id => todoData.findIndex((item) => item.id === id)
 
@@ -21,25 +23,15 @@ export default function App() {
 		})
 	}
 
-	const [todoData, setTodoData] = useState([
-		{ //test dyd
-				id: "1",
-				title: "공부하기",
-				completed: true
-			},
-			{
-				id: "2",
-				title: "청소하기",
-				completed: false
-			}
-	]);
+	const [todoData, setTodoData] = useState(initialTodoData);
 	const [value, setValue] = useState("");
 
 	// 삭제
 	const handleClick = useCallback((id) => {
 		const newTodoData = todoData.filter((data) => data.id !== id);
-		setTodoData(newTodoData);}
-	,[todoData]);
+		setTodoData(newTodoData);
+		localStorage.setItem('todoData', JSON.stringify(newTodoData));
+	},[todoData]);
 	
 
 	const handleSubmit = (e) => {
@@ -53,11 +45,13 @@ export default function App() {
 
 		// this.setState({ todoData: [...todoData, newTodo ], value: ""}); //전개 연산자를 이용해서, 원래 state의 todoData에, newTodo를 추가해준다.
 		setTodoData(prev => [...prev, newTodo]);
+		localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo]));
 		setValue("");
 	}
 
 	const handleRemoveClick = () => {
 		setTodoData([]);
+		localStorage.setItem('todoData', JSON.stringify([]));
 	}
 
 
