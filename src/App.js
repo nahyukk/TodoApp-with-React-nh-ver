@@ -2,6 +2,8 @@ import React, {useState} from "react"; // react 라이브러리에서 react를 �
 import "./App.css";
 import List from "./components/List";
 import Foam from "./components/Foam";
+import { closestCorners, DndContext } from '@dnd-kit/core';
+import { arrayMove } from "@dnd-kit/sortable";
 
 
 export default function App() {
@@ -20,6 +22,20 @@ export default function App() {
 		],
 		value: ""
 	};
+
+	const getTodoDataPos = id => todoData.findIndex((item) => item.id === id)
+
+	const handleDragEnd = event => {
+		const {active, over} = event
+
+		if(active.id === over.id) return;
+		setTodoData(todoData => {
+			const originalPos = getTodoDataPos(active.id);
+			const newPos = getTodoDataPos(over.id);
+
+			return arrayMove(todoData, originalPos, newPos);
+		})
+	}
 
 	const [todoData, setTodoData] = useState([]);
 	const [value, setValue] = useState("");
@@ -47,9 +63,9 @@ export default function App() {
 					<div className="flex justify-between mb-3 ">
 						<h1>TODO LIST</h1>
 					</div>
-						
-					<List todoData={todoData} setTodoData={setTodoData}/>	
-
+					<DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+						<List todoData={todoData} setTodoData={setTodoData}/>	
+					</DndContext>
 					<Foam handleSubmit={handleSubmit} value={value} setValue={setValue} />
 				
 				</div>
