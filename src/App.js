@@ -1,7 +1,7 @@
 import React, {useState} from "react"; // react 라이브러리에서 react를 가져오고 Component-> useState 라는 클래스도 가져옴.
 import "./App.css";
 import List from "./components/List";
-import Foam from "./components/Foam";
+import Form from "./components/Form";
 import { closestCorners, DndContext } from '@dnd-kit/core';
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -66,7 +66,7 @@ export default function App() {
 					<DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
 						<List todoData={todoData} setTodoData={setTodoData}/>	
 					</DndContext>
-					<Foam handleSubmit={handleSubmit} value={value} setValue={setValue} />
+					<Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
 				
 				</div>
 			</div>
