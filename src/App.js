@@ -7,8 +7,6 @@ import { arrayMove } from "@dnd-kit/sortable";
 
 
 export default function App() {
-	console.log("app component")
-
 	const getTodoDataPos = id => todoData.findIndex((item) => item.id === id)
 
 	const handleDragEnd = event => {
@@ -67,7 +65,7 @@ export default function App() {
 		<div className="flex items-center justify-center w-screen h-screen bg-blue-200">
 			<div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
 				<div className="flex justify-between mb-3 ">
-					<h1>TODO LIST</h1>
+					<h1 className="text-3xl font-extrabold">TODO LIST</h1>
 					<button onClick={handleRemoveClick}> DELETE ALL</button>
 				</div>
 				<DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>

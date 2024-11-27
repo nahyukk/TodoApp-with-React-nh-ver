@@ -8,7 +8,6 @@ import { CSS } from "@dnd-kit/utilities";
 import Task from "./Task";
 
 const List = React.memo(({ todoData, setTodoData, handleClick }) => {
-	console.log("list component")
 	// 드래그 가능한 개별 항목 정의 컴포넌트
 	const SortableItem = ({data})  => {
 		const { attributes, listeners, setNodeRef, transform, transition, isDragging 
@@ -28,6 +27,9 @@ const List = React.memo(({ todoData, setTodoData, handleClick }) => {
 			style={style}
 			>
 				<Task 
+						key={data.id}
+						id={data.id}
+						title={data.title}
 						handleClick={handleClick}
 						data={data}
 						todoData={todoData}

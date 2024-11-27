@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function Foam({value, setValue, handleSubmit }) {
-	console.log("form component")
 	const handleChange = (e) => {
 		setValue(e.target.value);
 
