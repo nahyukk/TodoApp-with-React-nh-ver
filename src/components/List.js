@@ -44,6 +44,7 @@ export default function List({ todoData, setTodoData }) {
         <input
           className="mr-2.5"
           type="checkbox"
+					onPointerDown={(e) => e.stopPropagation()}
           onChange={() => handleCompleteChange(data.id)}
           checked={data.completed}
         />
@@ -53,6 +54,7 @@ export default function List({ todoData, setTodoData }) {
       </div>
       <button
         className="px-4 py-2 float-right"
+				onPointerDown={(e) => e.stopPropagation()}
         onClick={() => handleClick(data.id)}
       >
         X
