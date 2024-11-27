@@ -7,7 +7,8 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import Task from "./Task";
 
-export default function List({ todoData, setTodoData }) {
+const List = React.memo(({ todoData, setTodoData, handleClick }) => {
+	console.log("list component")
 	// 드래그 가능한 개별 항목 정의 컴포넌트
 	const SortableItem = ({data})  => {
 		const { attributes, listeners, setNodeRef, transform, transition, isDragging 
@@ -27,6 +28,7 @@ export default function List({ todoData, setTodoData }) {
 			style={style}
 			>
 				<Task 
+						handleClick={handleClick}
 						data={data}
 						todoData={todoData}
 						setTodoData={setTodoData}
@@ -50,4 +52,7 @@ export default function List({ todoData, setTodoData }) {
       ))}
     </SortableContext>
   );
-};
+});
+
+
+export default List

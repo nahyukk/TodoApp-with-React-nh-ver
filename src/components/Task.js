@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Task = ({
-	todoData, setTodoData, isDragging, data
+const Task = React.memo(({
+	todoData, setTodoData, isDragging, data, handleClick
 }) => {
+	console.log("task component")
 	// 체크박스 부분
 	const handleCompleteChange = (id) => {
     const newTodoData = todoData.map((data) =>
@@ -11,11 +12,7 @@ const Task = ({
     setTodoData(newTodoData);
   };
 
-	// 삭제
-  const handleClick = (id) => {
-    const newTodoData = todoData.filter((data) => data.id !== id);
-    setTodoData(newTodoData);
-  };
+	
 
 	return (
 		<div
@@ -42,6 +39,6 @@ const Task = ({
       </button>
     </div>
 	)
-}
+});
 
 export default Task
